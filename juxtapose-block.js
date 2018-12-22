@@ -28,14 +28,12 @@
 				source: 'attribute',
 				attribute: 'src',
 				selector: '.imgLeft',
-				default: 'https://placekitten.com/600/400',
 			},
 			imageRight: {
 				type: 'string',
 				source: 'attribute',
 				attribute: 'src',
 				selector: '.imgRight',
-				default: 'https://placekitten.com/600/400',
 			},
 		},
 
@@ -79,8 +77,8 @@
 			return el(
 				'div',
 				{ className: 'juxtapose' }, [
-					el( 'img', { src: attributes.imageLeft, className: 'imageLeft' }, '' ),
-					el( 'img', { src: attributes.imageRight, className: 'imageRight' }, '' )
+					el( 'img', { src: attributes.imageLeft, className: 'imgLeft' }, '' ),
+					el( 'img', { src: attributes.imageRight, className: 'imgRight' }, '' )
 				]
 			);
 		}

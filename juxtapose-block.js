@@ -23,17 +23,19 @@
 		category: 'layout',
 
 		attributes: {
-			images: {
-				type: 'array',
-				source: 'query',
-				selector: 'img',
-				query: {
-					url: {
-						type: 'string',
-						source: 'attribute',
-						attribute: 'src',
-					}
-				},
+			imageLeft: {
+				type: 'string',
+				source: 'attribute',
+				attribute: 'src',
+				selector: '.imgLeft',
+				default: 'https://placekitten.com/600/400',
+			},
+			imageRight: {
+				type: 'string',
+				source: 'attribute',
+				attribute: 'src',
+				selector: '.imgRight',
+				default: 'https://placekitten.com/600/400',
 			},
 		},
 
@@ -43,20 +45,32 @@
 					el( 'div', {}, 'Start Position' )
 				),
 				el( 'div', { className: className },
-
-					el( MediaUpload, {
-						onSelect: function(el) { console.log( el ); },
-						allowedTypes: [ 'image' ],
-						render: ( { open } ) => (
-							el( IconButton, {
-									className: "components-toolbar__control",
-									label: 'Add image',
-									icon: 'edit',
-									onClick: open,
-								}
+					[
+						el( MediaUpload, {
+							onSelect: function(el) { setAttributes( { imageLeft: el.url } ); },
+							allowedTypes: [ 'image' ],
+							render: ( { open } ) => (
+								el( IconButton, {
+										label: 'Add image',
+										icon: 'edit',
+										onClick: open,
+									}
+								)
 							)
-						)
-					})
+						}),
+						el( MediaUpload, {
+							onSelect: function(el) { setAttributes( { imageRight: el.url } ); },
+							allowedTypes: [ 'image' ],
+							render: ( { open } ) => (
+								el( IconButton, {
+										label: 'Add image',
+										icon: 'edit',
+										onClick: open,
+									}
+								)
+							)
+						})
+					]
 				)
 			];
 		},
@@ -65,8 +79,8 @@
 			return el(
 				'div',
 				{ className: 'juxtapose' }, [
-					el( 'img', { src: 'http://placekitten.com/600/400' }, '' ),
-					el( 'img', { src: 'http://placekitten.com/600/400' }, '' )
+					el( 'img', { src: attributes.imageLeft, className: 'imageLeft' }, '' ),
+					el( 'img', { src: attributes.imageRight, className: 'imageRight' }, '' )
 				]
 			);
 		}

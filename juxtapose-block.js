@@ -11,7 +11,8 @@
 ( function(wp) {
 	const  el = wp.element.createElement;
     const registerBlockType = wp.blocks.registerBlockType;
-	const { InspectorControls } = wp.editor;
+	const { InspectorControls, MediaUpload } = wp.editor;
+	const IconButton = wp.components.IconButton;
 
 	registerBlockType( 'mkaz/juxtapose-block', {
 
@@ -34,7 +35,7 @@
 					}
 				},
 			},
-		}
+		},
 
 		edit({ attributes, setAttributes, className }) {
 			return [
@@ -42,7 +43,20 @@
 					el( 'div', {}, 'Start Position' )
 				),
 				el( 'div', { className: className },
-					el( 'div', {}, 'Hey Im a Juxtapose Block' )
+
+					el( MediaUpload, {
+						onSelect: function(el) { console.log( el ); },
+						allowedTypes: [ 'image' ],
+						render: ( { open } ) => (
+							el( IconButton, {
+									className: "components-toolbar__control",
+									label: 'Add image',
+									icon: 'edit',
+									onClick: open,
+								}
+							)
+						)
+					})
 				)
 			];
 		},

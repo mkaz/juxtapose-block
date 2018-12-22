@@ -24,7 +24,7 @@ function juxtapose_editor_assets() {
 	wp_enqueue_script(
 		'juxtapose-block',
 		plugins_url( $block_path, __FILE__ ),
-		array( 'wp-blocks', 'wp-editor', 'wp-element' ),
+		array( 'wp-blocks', 'wp-editor', 'wp-element', 'wp-components' ),
 		filemtime( plugin_dir_path( __FILE__ ) . $block_path )
 	);
 

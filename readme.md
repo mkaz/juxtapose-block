@@ -1,6 +1,6 @@
 # WORK IN PROGRESS
 
-This is in very early development stages, barely workable, everything will change and break &emdash; please wait for an initial release before trying it out.  The public repo was started early so I can collaborate, and to get source off my computer.
+This is in very early development stages, barely workable, everything will change and break &mdash; please wait for an initial release before trying it out.  The public repo was started early so I can collaborate, and to get source off my computer.
 
 ## Juxtapose Block
 

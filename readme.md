@@ -1,14 +1,15 @@
+# WORK IN PROGRESS
 
-# Juxtapose Block
+This is in very early development stages, barely workable, everything will change and break &emdash; please wait for an initial release before trying it out.  The public repo was started early so I can collaborate, and to get source off my computer.
+
+## Juxtapose Block
 
 A WordPress plugin which adds a block that enables you to create a side-by-side comparison of two images.
 The block is built off the [JuxtaposeJS library](https://juxtapose.knightlab.com/).
 
-
 Example:
 
-<img src="screenshot.png" title="Screenshot example in use" alt="screen shot" width="554" height="202" style="border:1px solid #333"/>
-
+--INSERT SCREEN SHOT
 
 ### Usage
 

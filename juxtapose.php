@@ -45,7 +45,7 @@ add_action( 'enqueue_block_editor_assets', 'juxtapose_editor_assets' );
  */
 function juxtapose_view_assets() {
 	// Files.
-	$juxtapose_js = '/assets/juxtapose/juxtapose.min.js';
+	$juxtapose_js = '/assets/juxtapose/juxtapose.js';
 	$juxtapose_css = '/assets/juxtapose/juxtapose.css';
 
 	// Enqueue Juxtapose style.

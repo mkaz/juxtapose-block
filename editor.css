@@ -1,0 +1,19 @@
+
+/* main block wrapper */
+.wp-block-mkaz-juxtapose-block .edit-controls {
+	display: flex;
+}
+
+.img-edit-left,
+.img-edit-right {
+	min-width: 180px;
+	width: 100%;
+	max-width: 50%;
+	display: block;
+	text-align: center;
+}
+
+.img-edit-left img,
+.img-edit-right img {
+
+}

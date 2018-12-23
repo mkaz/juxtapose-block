@@ -38,36 +38,66 @@
 		},
 
 		edit({ attributes, setAttributes, className }) {
+			let previewJuxtapose = null
+			let imgLeft = null;
+			let imgRight = null;
+			let actionLeftLabel = 'Add';
+			let actionRightLabel = 'Add';
+
+			// mediaUploadControls
+			if ( attributes.imageLeft || attributes.imageRight ) {
+				if ( attributes.imageLeft ) {
+					imgLeft = el( 'img', { src: attributes.imageLeft } );
+					actionLeftLabel = 'Change';
+				}
+				if ( attributes.imageRight ) {
+					imgRight = el( 'img', { src: attributes.imageRight } );
+					actionRightLabel = 'Change';
+				}
+
+				cls = ( attributes.imageLeft && attributes.imageRight ) ? 'juxtapose' : '';
+				previewJuxtapose = el( 'div', { className: cls }, [ imgLeft, imgRight ]);
+			}
+
+			const editControls = el( 'div', { className: 'edit-controls' }, [
+				el( 'div', { className: 'img-edit-left' },
+					el( MediaUpload, {
+						onSelect: function(el) { setAttributes( { imageLeft: el.url } ); juxtapose.scanPage(); },
+						allowedTypes: [ 'image' ],
+						render: ( { open } ) => (
+							el( IconButton, {
+									icon: 'edit',
+									onClick: open,
+								},
+								`${actionLeftLabel} Left Image`
+							)
+						)
+					})
+				),
+				el( 'div', { className: 'img-edit-right' },
+					el( MediaUpload, {
+						onSelect: function(el) { setAttributes( { imageRight: el.url } ); juxtapose.scanPage(); },
+						allowedTypes: [ 'image' ],
+						render: ( { open } ) => (
+							el( IconButton, {
+									icon: 'edit',
+									onClick: open,
+								},
+								`${actionRightLabel} Right Image`
+							)
+						)
+					})
+				)
+			]);
+
 			return [
 				el( InspectorControls, { key: 'controls' },
 					el( 'div', {}, 'Start Position' )
 				),
 				el( 'div', { className: className },
 					[
-						el( MediaUpload, {
-							onSelect: function(el) { setAttributes( { imageLeft: el.url } ); },
-							allowedTypes: [ 'image' ],
-							render: ( { open } ) => (
-								el( IconButton, {
-										label: 'Add image',
-										icon: 'edit',
-										onClick: open,
-									}
-								)
-							)
-						}),
-						el( MediaUpload, {
-							onSelect: function(el) { setAttributes( { imageRight: el.url } ); },
-							allowedTypes: [ 'image' ],
-							render: ( { open } ) => (
-								el( IconButton, {
-										label: 'Add image',
-										icon: 'edit',
-										onClick: open,
-									}
-								)
-							)
-						})
+						previewJuxtapose,
+						editControls
 					]
 				)
 			];

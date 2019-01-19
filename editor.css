@@ -1,11 +1,11 @@
 
 /* main block wrapper */
-.wp-block-mkaz-juxtapose-block .edit-controls {
+.controls {
 	display: flex;
 }
 
-.img-edit-left,
-.img-edit-right {
+.img-edit-before,
+.img-edit-after {
 	min-width: 180px;
 	width: 100%;
 	max-width: 50%;
@@ -13,7 +13,6 @@
 	text-align: center;
 }
 
-.img-edit-left img,
-.img-edit-right img {
-
+.img-edit-before {
+	border-right: 1px solid #999999;
 }

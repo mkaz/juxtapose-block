@@ -8,7 +8,7 @@
 
 // WordPress dependencies
 const { registerBlockType } = wp.blocks;
-const { InspectorControls, MediaUpload } = wp.editor;
+const { InspectorControls, MediaPlaceholder } = wp.editor;
 const { IconButton } = wp.components;
 const { Fragment } = wp.element;
 
@@ -21,27 +21,27 @@ registerBlockType( 'mkaz/juxtapose-block', {
 	category: 'layout',
 
 	attributes: {
-		imageLeft: {
+		imageBefore: {
 			type: 'string',
 			source: 'attribute',
 			attribute: 'src',
-			selector: '.imgLeft',
+			selector: '.imgBefore',
 		},
-		imageRight: {
+		imageAfter: {
 			type: 'string',
 			source: 'attribute',
 			attribute: 'src',
-			selector: '.imgRight',
+			selector: '.imgAfter',
 		},
 	},
 
 	edit: ({ attributes, setAttributes, className }) => {
-		const { imageLeft, imageRight } = attributes;
+		const { imageBefore, imageAfter } = attributes;
 
 		// if both are defined, add juxtaspose class
 		// the juxtapose library uses class when page is scanned
 		// to find the images and apply the side-by-side magic
-		cls = ( imageLeft && imageRight ) ? 'juxtapose' : '';
+		cls = ( imageBefore && imageAfter ) ? 'juxtapose' : 'controls';
 
 		return (
 			<Fragment>
@@ -50,33 +50,41 @@ registerBlockType( 'mkaz/juxtapose-block', {
 				</InspectorControls>
 				<div className={cls}>
 
-					{ imageLeft ? (
-						<img src={imageLeft} />
+					{ imageBefore ? (
+						<img src={imageBefore} />
 					) : (
-						<div className='img-edit-left'>
-							<MediaUpload
-								onSelect = {( el ) => { setAttributes( { imageLeft: el.url } ); juxtapose.scanPage(); }}
+						<div className='img-edit-before'>
+							<MediaPlaceholder
+								onSelect = {
+									( el ) => {
+										setAttributes( { imageBefore: el.url } );
+										juxtapose.scanPage();
+									}
+								}
 								allowedTypes = {[ 'image' ]}
-								render = {( { open } ) => (
-									<IconButton icon='edit' onClick={open}> Add Left Image </IconButton>
-								)} />
+								labels ={ {title: 'Image Before'} }
+							/>
 						</div>
 					)}
 
-					{ imageRight ? (
-						<img src={imageRight} />
+					{ imageAfter ? (
+						<img src={imageAfter} />
 					) : (
-						<div className='img-edit-right'>
-							<MediaUpload
-								onSelect = {( el ) => { setAttributes( { imageRight: el.url } ); juxtapose.scanPage(); }}
+						<div className='img-edit-after'>
+							<MediaPlaceholder
+								onSelect = {
+									( el ) => {
+										setAttributes( { imageAfter: el.url } );
+										juxtapose.scanPage();
+									}
+								}
 								allowedTypes = {[ 'image' ]}
-								render = {( { open } ) => (
-									<IconButton icon='edit' onClick={open}> Add Right Image </IconButton>
-								)} />
+								labels = { {title: 'Image After'} }
+							/>
 						</div>
 					)}
 				</div>
-				<div> Spacer to Select Block </div>
+				<div> Caption here... </div>
 			</Fragment>
 		);
 	},
@@ -84,8 +92,8 @@ registerBlockType( 'mkaz/juxtapose-block', {
 	save: ({ attributes }) => {
 		return (
 			<div className='juxtapose'>
-				<img src={attributes.imageLeft} className='imgLeft'/>
-				<img src={attributes.imageRight} className= 'imgRight'/>
+				<img src={attributes.imageBefore} className='imgBefore'/>
+				<img src={attributes.imageAfter} className= 'imgAfter'/>
 			</div>
 		);
 	}

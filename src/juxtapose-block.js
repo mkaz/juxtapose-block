@@ -9,7 +9,7 @@
 // WordPress dependencies
 const { registerBlockType } = wp.blocks;
 const { InspectorControls, MediaPlaceholder } = wp.editor;
-const { IconButton } = wp.components;
+const { TextControl } = wp.components;
 const { Fragment } = wp.element;
 
 registerBlockType( 'mkaz/juxtapose-block', {
@@ -33,10 +33,15 @@ registerBlockType( 'mkaz/juxtapose-block', {
 			attribute: 'src',
 			selector: '.imgAfter',
 		},
+		caption: {
+			type: 'string',
+			source: 'html',
+			selector: 'figcaption',
+		},
 	},
 
 	edit: ({ attributes, setAttributes, className }) => {
-		const { imageBefore, imageAfter } = attributes;
+		const { imageBefore, imageAfter, caption } = attributes;
 
 		// if both are defined, add juxtaspose class
 		// the juxtapose library uses class when page is scanned
@@ -84,17 +89,26 @@ registerBlockType( 'mkaz/juxtapose-block', {
 						</div>
 					)}
 				</div>
-				<div> Caption here... </div>
+				<div className='caption'>
+					<TextControl
+						placeholder="Caption here..."
+						onChange={ (val) => setAttributes({ caption: val }) }
+						value={caption}
+					/>
+				</div>
 			</Fragment>
 		);
 	},
 
 	save: ({ attributes }) => {
 		return (
-			<div className='juxtapose'>
-				<img src={attributes.imageBefore} className='imgBefore'/>
-				<img src={attributes.imageAfter} className= 'imgAfter'/>
-			</div>
+			<Fragment>
+				<figure className='juxtapose'>
+					<img src={attributes.imageBefore} className='imgBefore'/>
+					<img src={attributes.imageAfter} className= 'imgAfter'/>
+				</figure>
+				<figcaption>{attributes.caption}</figcaption>
+			</Fragment>
 		);
 	}
 });

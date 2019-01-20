@@ -345,3 +345,8 @@ a.jx-knightlab:focus span.juxtapose-name{
 	color: #000;
 	border: none;
 }
+
+figcaption {
+	text-align: center;
+	font-size: 85%;
+}

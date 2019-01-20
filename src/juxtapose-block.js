@@ -9,7 +9,7 @@
 // WordPress dependencies
 const { registerBlockType } = wp.blocks;
 const { InspectorControls, MediaPlaceholder } = wp.editor;
-const { IconButton } = wp.components;
+const { TextControl } = wp.components;
 const { Fragment } = wp.element;
 
 registerBlockType( 'mkaz/juxtapose-block', {
@@ -84,7 +84,11 @@ registerBlockType( 'mkaz/juxtapose-block', {
 						</div>
 					)}
 				</div>
-				<div> Caption here... </div>
+				<div className='caption'>
+					<TextControl
+						placeholder="Caption here..."
+					/>
+				</div>
 			</Fragment>
 		);
 	},

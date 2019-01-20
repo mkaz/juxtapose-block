@@ -16,3 +16,13 @@
 .img-edit-before {
 	border-right: 1px solid #999999;
 }
+
+.caption {
+	text-align: center;
+}
+
+.caption input[type="text"] {
+	width: 50%;
+	border: none;
+	text-align:center;
+}

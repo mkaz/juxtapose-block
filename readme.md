@@ -13,11 +13,27 @@ Example:
 Install juxtapose-block plugin to your WordPress plugins directory and activate. You can download a zip from the [releases page](https://github.com/mkaz/juxtapose-block/releases).
 
 
+### Development
+
+The juxtapose-block uses a standard npm build process.
+
+Development build w/ watch:
+```
+npm install
+npm run dev
+```
+
+Production build:
+```
+npm install
+npm run build
+```
+
+TODO: add linting, tests, and other "real" things.
 
 ### Colophon
 
 - Uses JuxtaposeJS from Knight Lab, https://juxtapose.knightlab.com/
-
 
 
 ### License

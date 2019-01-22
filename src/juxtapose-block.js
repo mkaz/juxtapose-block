@@ -54,17 +54,22 @@ registerBlockType( 'mkaz/juxtapose-block', {
 		return (
 			<Fragment>
 				<InspectorControls key='controls'>
+					<h4> Orientation </h4>
 					<SelectControl
-						label="Orientation"
 						value={ orientation }
 						options={ [
-							{ label: 'Horizontal', value: 'horizontal' },
-							{ label: 'Vertical', value: 'vertical' },
+							{ label: 'Side by Side', value: 'horizontal' },
+							{ label: 'Above and Below', value: 'vertical' },
 						] }
-						onChange={ ( val ) => { setAttributes( { orientation: val } ) } }
+						onChange={ ( val ) => {
+							setAttributes( { orientation: val } );
+							// need slight delay so markup can be updated before
+							// scan page gets triggered
+							setTimeout( function() { juxtapose.scanPage(); }, 100 );
+						} }
 					/>
 				</InspectorControls>
-				<div className={cls}>
+				<div className={cls} data-mode={orientation}>
 
 					{ imageBefore ? (
 						<img src={imageBefore} />
@@ -114,7 +119,7 @@ registerBlockType( 'mkaz/juxtapose-block', {
 	save: ({ attributes }) => {
 		return (
 			<Fragment>
-				<figure className='juxtapose'>
+				<figure className='juxtapose' data-mode={attributes.orientation}>
 					<img src={attributes.imageBefore} className='imgBefore'/>
 					<img src={attributes.imageAfter} className= 'imgAfter'/>
 				</figure>

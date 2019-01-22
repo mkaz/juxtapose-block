@@ -9,7 +9,7 @@
 // WordPress dependencies
 const { registerBlockType } = wp.blocks;
 const { InspectorControls, MediaPlaceholder } = wp.editor;
-const { TextControl } = wp.components;
+const { SelectControl, TextControl } = wp.components;
 const { Fragment } = wp.element;
 
 registerBlockType( 'mkaz/juxtapose-block', {
@@ -38,10 +38,13 @@ registerBlockType( 'mkaz/juxtapose-block', {
 			source: 'html',
 			selector: 'figcaption',
 		},
+		orientation: {
+			type: 'string',
+		}
 	},
 
 	edit: ({ attributes, setAttributes, className }) => {
-		const { imageBefore, imageAfter, caption } = attributes;
+		const { imageBefore, imageAfter, caption, orientation } = attributes;
 
 		// if both are defined, add juxtaspose class
 		// the juxtapose library uses class when page is scanned
@@ -51,9 +54,22 @@ registerBlockType( 'mkaz/juxtapose-block', {
 		return (
 			<Fragment>
 				<InspectorControls key='controls'>
-					<div> Start Position </div>
+					<h4> Orientation </h4>
+					<SelectControl
+						value={ orientation }
+						options={ [
+							{ label: 'Side by Side', value: 'horizontal' },
+							{ label: 'Above and Below', value: 'vertical' },
+						] }
+						onChange={ ( val ) => {
+							setAttributes( { orientation: val } );
+							// need slight delay so markup can be updated before
+							// scan page gets triggered
+							setTimeout( function() { juxtapose.scanPage(); }, 100 );
+						} }
+					/>
 				</InspectorControls>
-				<div className={cls}>
+				<div className={cls} data-mode={orientation}>
 
 					{ imageBefore ? (
 						<img src={imageBefore} />
@@ -91,7 +107,7 @@ registerBlockType( 'mkaz/juxtapose-block', {
 				</div>
 				<div className='caption'>
 					<TextControl
-						placeholder="Caption here..."
+						placeholder="Write caption…"
 						onChange={ (val) => setAttributes({ caption: val }) }
 						value={caption}
 					/>
@@ -103,7 +119,7 @@ registerBlockType( 'mkaz/juxtapose-block', {
 	save: ({ attributes }) => {
 		return (
 			<Fragment>
-				<figure className='juxtapose'>
+				<figure className='juxtapose' data-mode={attributes.orientation}>
 					<img src={attributes.imageBefore} className='imgBefore'/>
 					<img src={attributes.imageAfter} className= 'imgAfter'/>
 				</figure>

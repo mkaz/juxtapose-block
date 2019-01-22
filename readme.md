@@ -10,7 +10,11 @@ Example:
 
 ### Usage
 
-Install juxtapose-block plugin to your WordPress plugins directory and activate. You can download a zip from the [releases page](https://github.com/mkaz/juxtapose-block/releases).
+Install juxtapose-block plugin to your WordPress plugins directory and activate. You can download a zip from the [releases page](https://github.com/mkaz/juxtapose-block/releases) and upload to install.
+
+* Add block to your post using the (+) block inspector
+* Select before and after images, works best if they are the same size
+* Select Orientation (Above/Below, Side-by-side) in Block settings
 
 
 ### Development

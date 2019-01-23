@@ -3,7 +3,7 @@
  * Plugin Name:  Juxtapose Block
  * Plugin URI:   https://github.com/mkaz/juxtapose-block
  * Description:  A plugin that adds a Juxtapose Block, allowing side-by-side image comparison.
- * Version:      0.3.0
+ * Version:      0.3.1
  * Author:       Marcus Kazmierczak
  * Author URI:   https://mkaz.blog/
  * License:      GPL2

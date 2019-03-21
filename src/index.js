@@ -49,7 +49,7 @@ registerBlockType( 'mkaz/juxtapose-block', {
 		// if both are defined, add juxtaspose class
 		// the juxtapose library uses class when page is scanned
 		// to find the images and apply the side-by-side magic
-		cls = ( imageBefore && imageAfter ) ? 'juxtapose' : 'controls';
+		const cls = ( imageBefore && imageAfter ) ? 'juxtapose' : 'controls';
 
 		return (
 			<Fragment>

@@ -18,7 +18,7 @@
  */
 function juxtapose_editor_assets() {
 	// Files.
-	$block_path = 'juxtapose-block.build.js';
+	$block_path = 'build/index.js';
 	$block_css = 'editor.css';
 
 	// Block.

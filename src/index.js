@@ -43,6 +43,14 @@ registerBlockType( 'mkaz/juxtapose-block', {
 		}
 	},
 
+	example: {
+		attributes: {
+			imageBefore: 'https://placedog.net/240/120',
+			imageAfter: 'https://placedog.net/239/119',
+			caption: 'Doggos',
+		},
+	},
+
 	edit: ({ attributes, setAttributes, className }) => {
 		const { imageBefore, imageAfter, caption, orientation } = attributes;
 

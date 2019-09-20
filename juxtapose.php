@@ -3,7 +3,7 @@
  * Plugin Name:  Juxtapose Block
  * Plugin URI:   https://github.com/mkaz/juxtapose-block
  * Description:  A plugin that adds a Juxtapose Block, allowing side-by-side image comparison.
- * Version:      0.3.2
+ * Version:      0.3.3
  * Author:       Marcus Kazmierczak
  * Author URI:   https://mkaz.blog/
  * License:      GPL2
@@ -21,12 +21,14 @@ function juxtapose_editor_assets() {
 	$block_path = 'build/index.js';
 	$block_css = 'editor.css';
 
+	$asset_file = include( plugin_dir_path( __FILE__ ) . 'build/index.asset.php');
+
 	// Block.
 	wp_enqueue_script(
 		'juxtapose-block-js',
 		plugins_url( $block_path, __FILE__ ),
-		[ 'wp-blocks', 'wp-editor', 'wp-element', 'wp-components' ],
-		filemtime( plugin_dir_path( __FILE__ ) . $block_path )
+		$asset_file['dependencies'],
+		$asset_file['version']
 	);
 
 	// Editor CSS.
@@ -37,6 +39,8 @@ function juxtapose_editor_assets() {
 		filemtime( plugin_dir_path( __FILE__ ) . $block_css )
 	);
 
+	// enqueue view assets in editor
+	juxtapose_view_assets();
 }
 add_action( 'enqueue_block_editor_assets', 'juxtapose_editor_assets' );
 
@@ -64,7 +68,11 @@ function juxtapose_view_assets() {
 		filemtime( plugin_dir_path( __FILE__ ) . $juxtapose_js ),
 		true // In footer.
 	);
-
 }
-add_action( 'enqueue_block_assets', 'juxtapose_view_assets' );
+
+add_action( 'wp_enqueue_scripts', function() {
+	if ( has_block( 'mkaz/juxtapose-block' ) ) {
+		juxtapose_view_assets();
+	}
+} );
 

@@ -10,6 +10,7 @@ mkdir -p dist/juxtapose-block/build
 cp -r assets/juxtapose dist/juxtapose-block/assets/
 cp editor.css dist/juxtapose-block/
 cp build/index.js dist/juxtapose-block/build/
+cp build/index.asset.php dist/juxtapose-block/build/
 cp juxtapose.php dist/juxtapose-block/
 
 cd dist

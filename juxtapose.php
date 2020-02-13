@@ -71,15 +71,6 @@ function juxtapose_view_assets() {
 }
 
 add_action( 'wp_enqueue_scripts', function() {
-	// first if single page, jsut check for block and return
-	if ( is_singular() ) {
-		if ( has_block( 'mkaz/juxtapose-block' ) ) {
-			juxtapose_view_assets();
-		}
-		return;
-	}
-	// not single page, loop through posts and check
-	//
 	global $posts;
 
 	foreach ( $posts as $post ) {

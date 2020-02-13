@@ -3,7 +3,7 @@
  * Plugin Name:  Juxtapose Block
  * Plugin URI:   https://github.com/mkaz/juxtapose-block
  * Description:  A plugin that adds a Juxtapose Block, allowing side-by-side image comparison.
- * Version:      0.3.4
+ * Version:      0.3.5
  * Author:       Marcus Kazmierczak
  * Author URI:   https://mkaz.blog/
  * License:      GPL2
@@ -71,8 +71,22 @@ function juxtapose_view_assets() {
 }
 
 add_action( 'wp_enqueue_scripts', function() {
-	if ( has_block( 'mkaz/juxtapose-block' ) ) {
-		juxtapose_view_assets();
+	// first if single page, jsut check for block and return
+	if ( is_singular() ) {
+		if ( has_block( 'mkaz/juxtapose-block' ) ) {
+			juxtapose_view_assets();
+		}
+		return;
+	}
+	// not single page, loop through posts and check
+	//
+	global $posts;
+
+	foreach ( $posts as $post ) {
+		if ( has_block( 'mkaz/juxtapose-block', $post ) ) {
+			juxtapose_view_assets();
+			return;
+		}
 	}
 } );
 

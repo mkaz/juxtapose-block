@@ -1,4 +1,10 @@
 
+# NOTE:
+
+The Juxtapose block was integrated into the [Jetpack plugin](https://jetpack.com/) as the [Image Compare block](https://github.com/Automattic/jetpack/tree/master/extensions/blocks/image-compare). If you want to use on your site please use the Jetpack plugin for a supported version. 
+
+This repository was archived and will be kept around to learn from, but likely the plugin will slowly bit rot.
+
 ## Juxtapose Block
 
 A WordPress plugin which adds a block that enables you to create a side-by-side comparison of two images.
